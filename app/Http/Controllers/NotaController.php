@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Nota;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NotaController extends Controller
 {
@@ -14,7 +15,8 @@ class NotaController extends Controller
      */
     public function index()
     {
-        //
+        $notas=DB::select('select * from notas');
+        return view('notas.index', compact('notas'));
     }
 
     /**
@@ -24,7 +26,7 @@ class NotaController extends Controller
      */
     public function create()
     {
-        //
+        return view('notas.create');
     }
 
     /**
@@ -35,7 +37,8 @@ class NotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::insert('insert into notas (titulo_nota, desc_nota) values (?,?)',[$request->input('titulo_nota'),$request->input('desc_nota')]);
+        return redirect()->route('notas.index');
     }
 
     /**
@@ -57,7 +60,9 @@ class NotaController extends Controller
      */
     public function edit(Nota $nota)
     {
-        //
+        $notas=DB::select('select * from notas where id=?',[$nota->id]);
+        $nota=$notas[0];
+        return view('notas.edit', compact('nota'));
     }
 
     /**
@@ -69,7 +74,8 @@ class NotaController extends Controller
      */
     public function update(Request $request, Nota $nota)
     {
-        //
+        DB::update('update notas set titulo_nota=?, desc_nota=? where id=?',[$request->input('titulo_nota'),$request->input('desc_nota'),$nota->id]);
+        return redirect()->route('clientes.index');
     }
 
     /**
@@ -80,6 +86,24 @@ class NotaController extends Controller
      */
     public function destroy(Nota $nota)
     {
-        //
+        DB::delete('delete from notas where id=?',[$nota->id]);
+        return redirect()->route('notas.index');
     }
+    
+    /* Funciones customizadas *******************************************/
+
+    /**
+     * Display the specified resources.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+    ********************************************************************/
+    public function shows(Request $request)
+    {
+       $notas=DB::select('select * from notas where tiutlo_nota like ?',['%'.$request->input('tiutlo_nota').'%']);
+       // return view('notas.index', compact('notas'));
+    
+       return response()->json($notas);
+    }
+
 }
