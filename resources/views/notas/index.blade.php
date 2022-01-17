@@ -42,7 +42,7 @@
             @forelse ($notas as $nota)
             <tr>
                 <td scope="row">{{$nota->titulo_nota}}</td>
-                <td>{{$nota->des_nota}}</td>
+                <td>{{$nota->desc_nota}}</td>
                 <td>
                     {{-- Route::get('/clientes/{cliente}/edit',[ClienteController::class,'edit'])->name('clientes.edit'); --}}
                     <form action="{{route('notas.edit',['nota'=>$nota->id])}}" method="post">
