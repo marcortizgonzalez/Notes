@@ -16,7 +16,7 @@
         <div class="row pb-3">
             <div class="col">
                 {{-- Buscador (filtro) --}}
-                <form method="post">
+                <form method="post" onsubmit="return false">
                     <input type="hidden" name="_method" value="POST" id="postFiltro">
                     <div class="form-outline">
                         <input type="search" id="search" name="nombre" class="form-control" placeholder="Buscar por nombre..." aria-label="Search" onkeyup="filtro(); return false;"/>

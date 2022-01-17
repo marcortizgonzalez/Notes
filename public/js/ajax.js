@@ -36,7 +36,7 @@ function filtro() {
     var formData = new FormData();
     formData.append('_token', token);
     formData.append('_method', method);
-    formData.append('nombre', filtro);
+    formData.append('titulo_nota', filtro);
 
     /* Inicializar un objeto AJAX */
     var ajax = objetoAjax();
