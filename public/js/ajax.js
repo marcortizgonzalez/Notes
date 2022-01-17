@@ -46,7 +46,7 @@ function filtro() {
     POST -> Sí envía parámetros
     true -> asynchronous
     */
-    ajax.open("POST", "clientes/shows", true);
+    ajax.open("POST", "notas/shows", true);
     ajax.onreadystatechange = function() {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 var respuesta = JSON.parse(this.responseText);
@@ -54,23 +54,18 @@ function filtro() {
                 var recarga = '';
 
                 recarga += '<tr>';
-                recarga += '<th scope="col">#</th>';
-                recarga += '<th scope="col">Nombre</th>';
-                recarga += '<th scope="col">Ocupación</th>';
-                recarga += '<th scope="col">Teléfono</th>';
-                recarga += '<th scope="col">Sitio Web</th>';
+                recarga += '<th scope="col">Titulo</th>';
+                recarga += '<th scope="col">Descripcion</th>';
                 recarga += '<th scope="col" colspan="2">Acciones</th>';
                 recarga += '</tr>';
                 for (let i = 0; i < respuesta.length; i++) {
                     recarga += '<tr>';
                     recarga += '<td scope="row">' + respuesta[i].id + '</td>';
-                    recarga += '<td>' + respuesta[i].nombre + '</td>';
-                    recarga += '<td>' + respuesta[i].ocupacion + '</td>';
-                    recarga += '<td>' + respuesta[i].telefono + '</td>'
-                    recarga += '<td>' + respuesta[i].website + '</td>';
+                    recarga += '<td>' + respuesta[i].titulo + '</td>';
+                    recarga += '<td>' + respuesta[i].descripcion + '</td>';
                     recarga += '<td>';
                     // editar
-                    recarga += '<form action="./clientes/' + respuesta[i].id + '/edit" method="post">';
+                    recarga += '<form action="./notas/' + respuesta[i].id + '/edit" method="post">';
                     recarga += '<input type="hidden" name="_method" value="GET">';
                     recarga += '<button class= "btn btn-secondary" type="submit" value="Edit">Editar</button>';
                     recarga += '</form>';
@@ -78,7 +73,7 @@ function filtro() {
                     recarga += '<td>';
                     // eliminar
                     recarga += '<form method="post">';
-                    recarga += '<input type="hidden" name="_method" value="DELETE" id="deleteCliente">';
+                    recarga += '<input type="hidden" name="_method" value="DELETE" id="deleteNota">';
                     recarga += '<button class= "btn btn-danger" type="submit" value="Delete" onclick="eliminar(' + respuesta[i].id + '); return false;">Eliminar</button>';
                     recarga += '</form>';
                     recarga += '</td>';
@@ -97,7 +92,7 @@ function filtro() {
 }
 
 /* Función para filtrar recursos implementada con AJAX */
-function eliminar(cliente_id) {
+function eliminar(nota_id) {
     /* Obtener elemento html donde introduciremos la recarga (datos o mensajes) */
     var table = document.getElementById('table');
     /* 
@@ -118,7 +113,7 @@ function eliminar(cliente_id) {
     POST -> Sí envía parámetros
     true -> asynchronous
     */
-    ajax.open("POST", "clientes/" + cliente_id, true);
+    ajax.open("POST", "notas/" + nota_id, true);
     ajax.onreadystatechange = function() {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 var respuesta = JSON.parse(this.responseText);

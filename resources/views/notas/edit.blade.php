@@ -5,39 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Editar cliente</title>
+    <title>Editar nota</title>
 </head>
 <body>
-    <h1 class="p-4">App gestor de clientes > Client Detail</h1>
+    <h1 class="p-4">App gestor de notas > Nota Detail</h1>
 
     <div class="container p-5">
-        {{-- Route::put('/clientes/{cliente}',[ClienteController::class,'update'])->name('clientes.update'); --}}
-        <form class="form-horizontal" action="{{route('clientes.update',['cliente'=>$cliente->id])}}" method="post">
+        {{-- Route::put('/notas/{nota}',[NotaController::class,'update'])->name('notas.update'); --}}
+        <form class="form-horizontal" action="{{route('notas.update',['nota'=>$nota->id])}}" method="post">
             @csrf
             {{method_field('PUT')}}
             <div class="form-group">
-                <label>Nombre</label>
-                <input class="form-control" type="text" name="nombre" value="{{$cliente->nombre}}">
+                <label>Titulo</label>
+                <input class="form-control" type="text" name="titulo_nota" value="{{$nota->titulo_nota}}">
             </div>
             <div class="form-group pt-3">
-                <label>Ocupación</label>
-                <input class="form-control" type="text" name="ocupacion" id="" value="{{$cliente->ocupacion}}">
-            </div>
-            <div class="form-group pt-3">
-                <label>Teléfono</label>
-                <input class="form-control" type="number" name="telefono" value="{{$cliente->telefono}}">
-            </div>
-            <div class="form-group pt-3">
-
-                <label>Sitio Web</label>
-                <input class="form-control" type="text" name="website" id="" value="{{$cliente->website}}">
+                <label>Descripcion</label>
+                <input class="form-control" type="text" name="desc_nota" id="" value="{{$nota->desc_nota}}">
             </div>
             <div class="form-group pt-3">
                 <input class="btn btn-success" type="submit" value="Guardar">
             </div>
         </form>
-        {{-- Route::get('/clientes',[ClienteController::class,'index'])->name('clientes.index'); --}}
-        <form action="{{route('clientes.index')}}" method="post">
+        {{-- Route::get('/notas',[NotaController::class,'index'])->name('notas.index'); --}}
+        <form action="{{route('notas.index')}}" method="post">
             @csrf
             {{method_field('GET')}}
             <div class="form-group pt-3">
