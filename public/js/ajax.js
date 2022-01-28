@@ -93,8 +93,9 @@ function filtro() {
 
 /* Función para filtrar recursos implementada con AJAX */
 function eliminar(nota_id) {
+    //alert(nota_id);
     /* Obtener elemento html donde introduciremos la recarga (datos o mensajes) */
-    var table = document.getElementById('table');
+    //var table = document.getElementById('table');
     /* 
     Obtener elemento/s que se pasarán como parámetros: token, method, inputs... 
     var token = document.getElementById('token').getAttribute("content");
@@ -104,7 +105,11 @@ function eliminar(nota_id) {
     formData.append('_token', token);
     formData.append('clave', valor);
     */
-
+    var token = document.getElementById('token').getAttribute("content");
+    var formData = new FormData();
+    formData.append('_token', token);
+    var method = document.getElementById('deleteNota').value;
+    formData.append('_method', method);
     /* Inicializar un objeto AJAX */
     var ajax = objetoAjax();
     /*
@@ -118,9 +123,11 @@ function eliminar(nota_id) {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 var respuesta = JSON.parse(this.responseText);
                 if (respuesta.resultado == "OK") {
+                    //alert('Ok');
                     /* creación de estructura: la estructura que creamos no ha de contener código php ni código blade*/
                     /* utilizamos innerHTML para introduciremos la recarga en el elemento html pertinente */
                 } else {
+                    //alert('NOk');
                     /* creación de estructura: la estructura que creamos no ha de contener código php ni código blade*/
                     /* utilizamos innerHTML para introduciremos la recarga en el elemento html pertinente */
                 }
